@@ -49,8 +49,13 @@
   background-color: transparent;
   background-repeat: no-repeat;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1279px) {
   .moviesCard {
     height: 257px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .moviesCard {
+    height: 235px;
   }
 }

@@ -4,8 +4,8 @@ function Menu(props) {
   return(
   <div className={`menu ${props.isOpen ? 'menu_opened' : ''}`}>
   <div className="menu__container" >
-    <button className="menu__close" type="button" onClick={props.handleToggleMenu}></button>
       <div className="menu__box">
+        <button className="menu__close" type="button" onClick={props.handleToggleMenu}></button>
         <Link to='/' className="menu__link">Главная</Link>
         <Link to='/movies' className="menu__link" onClick={props.handleToggleMenu}>Фильмы</Link>
         <Link to='/saved-movies' className="menu__link" onClick={props.handleToggleMenu}>Сохраненные Фильмы</Link>

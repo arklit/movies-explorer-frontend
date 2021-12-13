@@ -1,4 +1,3 @@
-import button from '../../images/findButton.svg'
 function SearchForm() {
   return(
   <section className="searchForm">

@@ -1,4 +1,3 @@
-import arrow from "../../images/linkarrow.svg"
 import minilinkarrow from "../../images/minilinkarrow.svg"
 function Portfolio() {
   return(

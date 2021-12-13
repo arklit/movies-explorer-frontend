@@ -44,3 +44,8 @@
   display: flex;
   padding-top: 28px;
 }
+@media screen and (max-width: 1024px) {
+  .navigation__container {
+    display: none;
+  }
+}

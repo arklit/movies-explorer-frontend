@@ -49,7 +49,7 @@
   transform: translateX(18px);
   background-color:  #3DDC84;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1279px) {
 .FilterCheckbox__container {
   margin: 42px auto 51px;
   max-width: 169px;

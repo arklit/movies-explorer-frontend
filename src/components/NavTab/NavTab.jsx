@@ -1,5 +1,3 @@
-import AboutProject from '../AboutProject/AboutProject'
-
 function NavTab() {
   function scroll(e) {
     e.preventDefault();
