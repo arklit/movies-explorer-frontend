@@ -1,0 +1,19 @@
+.sectionTitle {
+  font-size: 22px;
+  line-height: 27px;
+  color: white;
+  font-style: normal;
+  font-weight: normal;
+}
+.sectionTitle__line {
+  border-bottom: 1px solid #DADADA;
+}
+@media screen and (max-width: 700px) {
+  .sectionTitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+.sectionTitle__line-black {
+  border-bottom: 1px solid #000000;
+}
