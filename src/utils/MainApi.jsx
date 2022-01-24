@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.kinofilm.nomoredomains.work'
+export const BASE_URL = 'https://api.kinofilm.nomoredomains.work'
 class Api {
   constructor(options) {
     this._url = options.url;
