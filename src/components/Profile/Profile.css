@@ -43,6 +43,28 @@
   outline: none;
   border: none;
   background-color: transparent;
+  cursor: pointer;
+}
+.profile__edit-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.profile__edit:hover {
+  opacity: 0.7
+}
+.profile__error {
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  margin-top: 6px;
+}
+.profile__success {
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #3DDC84;
+  margin-top: 6px;
 }
 .profile_signout {
   margin: 16px auto;
@@ -54,6 +76,7 @@
   text-decoration: none;
 }
 .profile__input {
+  width: 200px;
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;

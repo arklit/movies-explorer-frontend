@@ -10,7 +10,7 @@ function AuthForm(props) {
       <form
         className="authorization__form"
         onSubmit={props.onSubmit}
-        name={`${props.name}-form`}
+        name="form"
       >
         {props.children} 
         <p className="authorization__label">E-mail</p>
@@ -19,19 +19,42 @@ function AuthForm(props) {
           required
           id="email"
           type="email"
+          name="email"
           minLength="2"
+          value={props.email}
+          onChange={props.onChange}
         />
-        <span className="authorization__error">текст ошибки</span>
+        {props.errorEmail && (
+        <span className="authorization__error">{props.errorEmail}</span>
+        )}
         <p className="authorization__label">Пароль</p>
         <input 
         className="authorization__input"
         required
         id="password"
         type="password"
-        minLength="2"
+        minLength="6"
+        name='password'
+        value={props.password}
+        onChange={props.onChange}
         />
-        <span className="authorization__error">текст ошибки</span>
-        <button className="authorization__submit" type="submit">{props.buttonText}</button>
+        {props.errorPassword && (
+        <span className="authorization__error">{props.errorPassword}</span>
+        )}
+        {props.isError ? ( 
+          <span className="authorization__error" id="login-error">
+            {props.isError ? props.isError : props.errorText}
+          </span>
+        ) : null}
+        <button 
+        className={`authorization__submit ${
+          props.isValid && props.isFormSent
+          ? ''
+          : 'authorization__submit_disabled'
+        }`} 
+        type={props.isValid && props.isFormSent ? 'submit' : 'button'}
+        >{props.buttonText}
+        </button>
         <div className="authorization__hint">
           <p className="authorization__hint-text">{props.hintText}</p>
           <Link to={props.path} className="authorization__hint-link">{props.hintLink}</Link>

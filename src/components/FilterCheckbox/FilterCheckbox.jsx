@@ -1,11 +1,18 @@
 import React from "react"
-function FilterCheckbox() {
+function FilterCheckbox({ handleChangeRadio}) {
+  const checked = React.useRef();
+  function onChange() {
+    handleChangeRadio(checked.current.checked);
+  }
   return(
     <div className='FilterCheckbox__container'>
       <label className="FilterCheckbox__label">
         <input 
           type="checkbox" 
-          className="FilterCheckbox" 
+          className="FilterCheckbox"
+          ref={checked}
+          onChange={onChange}
+          defaultChecked={false}
           />
         <span className='FilterCheckbox__slider'></span>
       </label>
