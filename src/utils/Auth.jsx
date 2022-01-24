@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'http://api.kinofilm.nomoredomains.work';
 
 function getRes(res) {
   if (res.ok) {
