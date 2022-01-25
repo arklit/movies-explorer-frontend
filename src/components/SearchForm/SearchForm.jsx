@@ -32,7 +32,7 @@ function SearchForm({handleSubmit}) {
       onChange={handleChange}
       id="key-input"
       />
-      <button className="searchForm__button" type="button" />
+      <button className="searchForm__button" type="submit" />
     </form>
     <span className="searchForm__error" id="key-input-error">
       {searchError}

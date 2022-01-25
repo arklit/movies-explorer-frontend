@@ -33,7 +33,7 @@ class Api {
       method: 'POST',
       body: JSON.stringify({
         country: movie.country || "данные отсутствуют",
-        director: movie.director,
+        director: movie.director || "данные отсутствуют",
         duration: movie.duration,
         year: movie.year,
         description: movie.description,

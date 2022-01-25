@@ -197,7 +197,7 @@ function App(props) {
       setCurrentUser({ email: '', name: ''})
       setMovies([])
       localStorage.removeItem('movies')
-      localStorage.removeItem('savedMovies')
+      localStorage.removeItem('foundMovies')
     })
     .catch(err => console.log(err))
   }
