@@ -2,9 +2,10 @@ import { Link } from "react-router-dom"
 import React from "react"
 import { CurrentUserContext } from "../../contexts/CurrentUserContext"
 import {useFormWithValidation} from "../../validation/useFormWithValidation";
+import { pattern } from "../../utils/constants";
 
 function Profile(props) {
-  const { submitAuth, setIsSuccess, isSuccess, handleSignOut } = props;
+  const { setIsSuccess, isSuccess, handleSignOut } = props;
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid } =useFormWithValidation({
     name: currentUser.name, email: currentUser.email
@@ -12,7 +13,7 @@ function Profile(props) {
 
   const submitDisabled = values.email === '' || values.name === '' || 
   ( values.name === currentUser.name && values.email === currentUser.email )
-  || !isValid || submitAuth;
+  || !isValid;
 
 
   function handleSubmit(e) {
@@ -49,6 +50,7 @@ function Profile(props) {
               id="email"
               value={values.email || ''}
               onChange={handleChange}
+              pattern={pattern}
               />
           </div>
         </div>

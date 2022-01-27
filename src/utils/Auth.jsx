@@ -33,18 +33,6 @@ export const authorize = (email, password) => {
   .then(getRes)
 }
 
-export const getContent = () => {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    credentials: 'include',
-    })
-    .then(getRes)
-  }
-
 export const signOut = () => {
   return fetch(`${BASE_URL}/signout`, {
     method: 'DELETE',

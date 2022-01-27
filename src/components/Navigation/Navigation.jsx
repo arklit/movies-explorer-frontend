@@ -3,10 +3,12 @@ import headerLogo from '../../images/header-logo.svg';
 import React from 'react';
 import Menu from '../Menu/Menu';
 function Navigation(props) {
+  const { loggedIn } = props;
   const [isOpen, setIsOpen] = React.useState(false);
   function handleToggleMenu() {
       setIsOpen(!isOpen)
   }
+  const swapColor = `navigation__profile ${loggedIn ? 'navigation_logged' : ''}`
 return (
   <>
     <Menu isOpen={isOpen} handleToggleMenu={handleToggleMenu}/>
@@ -20,7 +22,7 @@ return (
             <NavLink to="/movies" className="navigation__movies">Фильмы</NavLink>
             <NavLink to="/saved-movies" className="navigation__saved">Сохранённые фильмы</NavLink>
           </div>
-          <NavLink to="/profile" className="navigation__profile">Аккаунт</NavLink>
+          <NavLink to="/profile" className={swapColor}>Аккаунт</NavLink>
         </div>
       </div>
   </>

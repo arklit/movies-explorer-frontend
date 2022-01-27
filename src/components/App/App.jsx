@@ -18,7 +18,7 @@ import searchMovies from '../../utils/searchMovies';
 import { shortDuration} from '../../utils/constants'
 function App(props) {
   const [loggedIn, setLoggedIn] = React.useState(false)
-  const [currentUser, setCurrentUser] = React.useState({})
+  const [currentUser, setCurrentUser] = React.useState({name: '', email: ''})
   const history = useHistory();
   const location = useLocation();
   const [isRegisterError, setIsRegisterError] = React.useState('');
@@ -34,7 +34,6 @@ function App(props) {
   const [savedKeyWord, setSavedKeyWord] = React.useState('');
   const [isShortSavedFilmChecked, setIsShortSavedFilmChecked] = React.useState(false);
   const [isShortFilmChecked, setIsShortFilmChecked] = React.useState(false);
-  const [submitBlock, setSubmitBlock] = React.useState(false)
   const [movies, setMovies] = React.useState(
     localStorage.getItem('foundMovies')
       ? JSON.parse(localStorage.getItem('foundMovies'))
@@ -43,9 +42,8 @@ function App(props) {
 
   React.useEffect(() => {
     if (loggedIn) {
-      Promise.all([api.getUserInfo(), api.getMovies()])
-        .then(([userData, moviesData]) => {
-          setCurrentUser(userData)
+      api.getMovies()
+        .then((moviesData) => {
           setSavedMovies(moviesData);
           setSavedMoviesId(moviesData.map((movie) => movie.movieId));
         })
@@ -150,7 +148,7 @@ function App(props) {
 
   function onRegister( name, email, password) {
     auth.register(name, email, password)
-      .then((res) => {
+      .then(() => {
         onLogin(email, password)
       })
       .catch((err) => { 
@@ -164,8 +162,7 @@ function App(props) {
   function onLogin(email, password) {
     auth.authorize(email, password)
       .then(() => {
-        setLoggedIn(true);
-        history.push('/movies')
+        tokenCheck()
       })
       .catch((err) => {
         console.log(err)
@@ -176,11 +173,16 @@ function App(props) {
       })
   }
   function tokenCheck() {
-    auth.getContent()
+    api.getUserInfo()
       .then((res) => {
         if(res) {
-          setLoggedIn(true)
+          setCurrentUser({
+            name: res.name,
+            email: res.email,
+            _id: res._id
+          });
         }
+        setLoggedIn(true)
         if (location.pathname === '/signin' || location.pathname === '/signup') {
           history.push('/movies');
         } else {
@@ -193,7 +195,7 @@ function App(props) {
     auth.signOut()
     .then(() => {
       setLoggedIn(false)
-      history.push('/signin')
+      history.push('/')
       setCurrentUser({ email: '', name: ''})
       setMovies([])
       localStorage.removeItem('movies')
@@ -206,7 +208,6 @@ function App(props) {
   }, []);
 
   function handleEditProfile(name,email) {
-    setSubmitBlock(true)
     api.updateUser(name, email)
     .then((res) => {
       setCurrentUser({
@@ -223,7 +224,7 @@ function App(props) {
     <div className="app__page">
       <Switch>
         <Route exact path="/">
-          <Header/>
+          <Header loggedIn={loggedIn}/>
           <Main/>
           <Footer/>
         </Route>
@@ -261,7 +262,6 @@ function App(props) {
           <Profile 
           handleSignOut={onSignOut}
           onEditProfile={handleEditProfile}
-          submitAuth={submitBlock}
           isSuccess={isSuccess}
           setIsSuccess={setIsSuccess}/>
         </ProtectedRoute>

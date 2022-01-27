@@ -22,7 +22,6 @@ function SearchForm({handleSubmit}) {
     <form className="searchForm__container" noValidate onSubmit={handleSearchSubmit}>
       <input 
       className="searchForm__input" 
-      minLength="2" 
       maxLength="40" 
       type="text" 
       placeholder="Фильм" 

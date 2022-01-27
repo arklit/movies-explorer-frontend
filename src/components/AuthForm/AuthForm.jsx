@@ -1,5 +1,6 @@
 import logo from '../../images/header-logo.svg'
 import { Link } from 'react-router-dom';
+import { pattern } from '../../utils/constants';
 function AuthForm(props) {
   return(
     <section className="authorization">
@@ -23,6 +24,7 @@ function AuthForm(props) {
           minLength="2"
           value={props.email}
           onChange={props.onChange}
+          pattern={pattern}
         />
         {props.errorEmail && (
         <span className="authorization__error">{props.errorEmail}</span>
