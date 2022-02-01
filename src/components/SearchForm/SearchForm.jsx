@@ -1,8 +1,9 @@
 import React from "react"
 import { useFormWithValidation} from '../../validation/useFormWithValidation'
-function SearchForm({handleSubmit}) {
+function SearchForm({handleSubmit, searchFormStorage}) {
+  const [inputValue, setInputValue] = React.useState(searchFormStorage);
   const { values, handleChange, errors, isValid } = useFormWithValidation({
-    key: '',
+    key: inputValue,
   });
   const [searchError, setSearchError] = React.useState('');
 
@@ -27,8 +28,11 @@ function SearchForm({handleSubmit}) {
       placeholder="Фильм" 
       required
       name="key"
-      value={values.key}
-      onChange={handleChange}
+      value={values.key || ''}
+      onChange={(e) => {
+        setInputValue(e.target.value)
+        handleChange(e)
+      }}
       id="key-input"
       />
       <button className="searchForm__button" type="submit" />

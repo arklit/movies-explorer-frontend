@@ -6,8 +6,10 @@ import React from "react";
 function Movies(props) {
   return(
     <section className="movies">
-      <SearchForm handleSubmit={props.handleSubmit}/>
-      <FilterCheckbox handleChangeRadio={props.handleChangeRadio} />
+      <SearchForm handleSubmit={props.handleSubmit} searchFormStorage={props.searchFormStorage}/>
+      <FilterCheckbox 
+      handleChangeRadio={props.handleChangeRadio}
+      checked={props.checked} />
       {props.isNotFound ? (
         <p className="movies-error">Ничего не найдено</p>
       ): null}

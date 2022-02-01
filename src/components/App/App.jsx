@@ -31,12 +31,21 @@ function App(props) {
   const [foundSavedMovies, setFoundSavedMovies] = React.useState([]);
   const [savedMoviesId, setSavedMoviesId] = React.useState([]);
   const [isNotFound, setIsNotFound] = React.useState(false);
+  const [searchFormStorage, setSearchFormStorage] = React.useState(
+    localStorage.getItem("search")
+        ? JSON.parse(localStorage.getItem("search"))
+        : ''
+);
+  const [checked, setChecked] = React.useState(
+    localStorage.getItem("checked")
+    ? JSON.parse(localStorage.getItem("checked"))
+    : false
+  )
   const [savedKeyWord, setSavedKeyWord] = React.useState('');
   const [isShortSavedFilmChecked, setIsShortSavedFilmChecked] = React.useState(false);
-  const [isShortFilmChecked, setIsShortFilmChecked] = React.useState(false);
   const [movies, setMovies] = React.useState(
-    localStorage.getItem('foundMovies')
-      ? JSON.parse(localStorage.getItem('foundMovies'))
+    localStorage.getItem("foundMovies")
+      ? JSON.parse(localStorage.getItem("foundMovies"))
       : []
   );
 
@@ -78,10 +87,10 @@ function App(props) {
   }, [isShortSavedFilmChecked]);
 
   const handleSearchMoviesChecked = () => {
-    const isShort = isShortFilmChecked;
-    const cards = JSON.parse(localStorage.getItem('foundMovies'));
+    const cards = JSON.parse(localStorage.getItem("foundMovies"));
+    localStorage.setItem("checked", JSON.stringify(checked))
     const shortCards = cards.filter((movie) => {
-      if (isShort) {
+      if (checked) {
         if (movie.duration < shortDuration) {
           return true;
         }
@@ -93,23 +102,26 @@ function App(props) {
     setIsNotFound(!shortCards.length);
   };
   React.useEffect(() => {
-    if (localStorage.getItem('foundMovies')) {
+    if (localStorage.getItem("foundMovies")) {
       handleSearchMoviesChecked();
     }
-  }, [isShortFilmChecked]);
+  }, [checked]);
 
   const handleSearchMovies = async (searchValue) => {
     setIsNotFound(false);
     setIsSearchLoading(true);
+    localStorage.removeItem("search");
     try {
-      let movies = JSON.parse(localStorage.getItem('movies'));
+      let movies = JSON.parse(localStorage.getItem("movies"));
       if (!movies) {
         const films = await getFilms();
-        localStorage.setItem('movies', JSON.stringify(films));
-        movies = JSON.parse(localStorage.getItem('movies'));
+        localStorage.setItem("movies", JSON.stringify(films));
+        movies = JSON.parse(localStorage.getItem("movies"));
       }
       const cards = searchMovies(movies, searchValue);
-      localStorage.setItem('foundMovies', JSON.stringify(cards));
+      localStorage.setItem("foundMovies", JSON.stringify(cards));
+      localStorage.setItem("search", JSON.stringify(searchValue));
+      setSearchFormStorage(searchValue)
       handleSearchMoviesChecked();
     } catch (err) {
       console.error(err);
@@ -195,11 +207,13 @@ function App(props) {
     auth.signOut()
     .then(() => {
       setLoggedIn(false)
-      history.push('/')
       setCurrentUser({ email: '', name: ''})
       setMovies([])
-      localStorage.removeItem('movies')
-      localStorage.removeItem('foundMovies')
+      localStorage.removeItem("movies")
+      localStorage.removeItem("foundMovies")
+      localStorage.removeItem("checked")
+      localStorage.removeItem("search")
+      history.push('/')
     })
     .catch(err => console.log(err))
   }
@@ -238,7 +252,9 @@ function App(props) {
             handleSaveMovie={handleSaveMovie}
             deleteMovie={deleteMovie}
             isLoading={isSearchLoading}
-            handleChangeRadio={setIsShortFilmChecked}/>
+            handleChangeRadio={setChecked}
+            checked={checked}
+            searchFormStorage={searchFormStorage}/>
           <Footer/>
         </ProtectedRoute>
         <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
