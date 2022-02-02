@@ -209,6 +209,7 @@ function App(props) {
       setLoggedIn(false)
       setCurrentUser({ email: '', name: ''})
       setMovies([])
+      setSearchFormStorage('')
       localStorage.removeItem("movies")
       localStorage.removeItem("foundMovies")
       localStorage.removeItem("checked")
