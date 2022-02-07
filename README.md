@@ -1,5 +1,21 @@
-# movies-explorer-frontend 
+## movies-explorer-frontend 
+Дипломный проект Яндекс.Практикума, совместно с BeatFilms. Суть проекта в одностраничном приложении которое позволяет находить фильмы, фильтровать их по длительности, а также сохранять понравившиеся. В приложении присутствует Регистрация и Аутентификация, адаптивная верстка, все формы валидированы.
 
-ссылка на макет фигмы https://www.figma.com/file/wqSGrysUlZcMEaCZF4MjE1/Diploma-(Copy)?node-id=891%3A3857
-домен с бэком https://api.kinofilm.nomoredomains.work/
-фронт https://kinofilm.nomoredomains.work/
+### Install
+ Клонируйте репозиторий. Используйте ```npm start``` для запуска проекта, для успешной работы с api также скопируйте репозиторий с бэкендом и замените адреса на локальные.
+
+### Stack
+- JavaScript
+- React
+- REST API
+- NodeJs
+- React-router
+- CSS3
+- Аутентификация
+- БЭМ
+- CRA
+- Валидация
+- Адаптивность
+
+### Update
+- Попробую переписать на redux/scss
